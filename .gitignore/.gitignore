@@ -1,0 +1,16 @@
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+
+# Intellij project files
+*.iml
+**/*.iml
+.idea/
+
+# Others
+target/
+**/target/
+logs/
+/LOG_HOME_IS_UNDEFINED/
