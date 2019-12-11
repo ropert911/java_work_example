@@ -1,6 +1,6 @@
 package com.quick.jdbc.repository;
 
-import com.quick.jdbc.entity.CDHHosts;
+import com.quick.jdbc.model.CDHHosts;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 

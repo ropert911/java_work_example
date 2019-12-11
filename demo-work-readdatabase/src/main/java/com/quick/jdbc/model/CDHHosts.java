@@ -1,4 +1,4 @@
-package com.quick.jdbc.entity;
+package com.quick.jdbc.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

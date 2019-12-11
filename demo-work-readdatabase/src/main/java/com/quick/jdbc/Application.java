@@ -1,7 +1,8 @@
 package com.quick.jdbc;
 
-import com.quick.jdbc.entity.CDHHosts;
+import com.quick.jdbc.model.CDHHosts;
 import com.quick.jdbc.repository.CDHHostRepository;
+import com.quick.jdbc.service.CDHDataBaseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,10 +50,13 @@ public class Application implements CommandLineRunner {
     @Value("${spring.datasource.driver-class-name}")
     private String pgsqlDriver;
 
+    @Autowired
+    CDHDataBaseService cdhDataBaseService;
+
     @Override
     public void run(String... strings) throws Exception {
         log.info("Query Data");
-        int method = 2;
+        int method = 4;
         //下面几种方法都可以
         switch (method) {
             case 1: {
@@ -97,6 +101,11 @@ public class Application implements CommandLineRunner {
             case 3:
                 List<CDHHosts> list = cdhHostRepository.getAll();
                 list.forEach(item -> log.info(item.toString()));
+                break;
+                //CDH DBTool
+            case 4:
+                String servers = cdhDataBaseService.getZooKeeperServers();
+                cdhDataBaseService.getHiveServer2();
                 break;
             default:
                 break;
