@@ -7,8 +7,10 @@
     <artifactId>java_work_example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-         <module>demo-work-dataforbigdata</module>
-        <module>demo-work-examples</module>
+         <module>demo-dataforbigdata</module>
+        <module>demo-readcdh</module>
+        <module>demo-readcdh-nonspring</module>
+        <module>demo-sendEvent</module>
     </modules>
     <packaging>pom</packaging>
 

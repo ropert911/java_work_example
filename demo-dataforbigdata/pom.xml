@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.1.RELEASE</version>
+        <version>2.2.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.xq.work.examplest</groupId>
-    <artifactId>demo-work-examples</artifactId>
+    <groupId>com.xq.study.demo-work-dataforbigdata</groupId>
+    <artifactId>demo-dataforbigdata</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo-work-examples</name>
+    <name>demo-dataforbigdata</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -36,23 +36,26 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka-clients</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.58</version>
-            <scope>compile</scope>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
         </dependency>
     </dependencies>
 
