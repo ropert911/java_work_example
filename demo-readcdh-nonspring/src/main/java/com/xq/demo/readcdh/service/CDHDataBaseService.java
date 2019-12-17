@@ -34,19 +34,7 @@ public class CDHDataBaseService {
         String portConfigAttr = "";
         String portConfigDefaultValue = "2181";
 
-        conn = CdhJdbcUtils.getConnection();
-        List<String> serversList = getServers(serviceName, rolesType, portConfigAttr, portConfigDefaultValue);
-        CdhJdbcUtils.closeConnection(conn);
-        conn = null;
-
-        String servers = "";
-        for (String server : serversList) {
-            if (servers.isEmpty()) {
-                servers = server;
-            } else {
-                servers += "," + server;
-            }
-        }
+        String servers = getServiceUrl(serviceName, rolesType, portConfigAttr, portConfigDefaultValue);
 
         logger.warn("zookeeper servers=={}", servers);
         System.out.println(String.format("zookeeper servers==%s", servers));
@@ -59,7 +47,6 @@ public class CDHDataBaseService {
      */
     public String getBootsTrapServers() {
         String serviceName = "kafka";
-        String rolesType = "KAFKA_BROKER";
         String portConfigAttr = "bootstrap.servers";
         String portConfigDefaultValue = "9092";
 
@@ -93,19 +80,7 @@ public class CDHDataBaseService {
         String portConfigAttr = "";
         String portConfigDefaultValue = "9092";
 
-        conn = CdhJdbcUtils.getConnection();
-        List<String> serversList = getServers(serviceName, rolesType, portConfigAttr, portConfigDefaultValue);
-        CdhJdbcUtils.closeConnection(conn);
-        conn = null;
-
-        String bootstrapServers = "";
-        for (String server : serversList) {
-            if (bootstrapServers.isEmpty()) {
-                bootstrapServers = server;
-            } else {
-                bootstrapServers += "," + server;
-            }
-        }
+        String bootstrapServers = getServiceUrl(serviceName, rolesType, portConfigAttr, portConfigDefaultValue);
 
         logger.warn("bootstrap.servers=={}", bootstrapServers);
         System.out.println(String.format("bootstrap.servers==%s", bootstrapServers));
@@ -126,7 +101,24 @@ public class CDHDataBaseService {
             logger.warn("hiverserver2=={}", server);
             System.out.println(String.format("hiverserver2==%s", server));
         }
+    }
 
+    private String getServiceUrl(String serviceName, String rolesType, String portConfigAttr, String portConfigDefaultValue) {
+        conn = CdhJdbcUtils.getConnection();
+        List<String> serversList = getServers(serviceName, rolesType, portConfigAttr, portConfigDefaultValue);
+        CdhJdbcUtils.closeConnection(conn);
+        conn = null;
+
+        String serviceUrl = "";
+        for (String server : serversList) {
+            if (serviceUrl.isEmpty()) {
+                serviceUrl = server;
+            } else {
+                serviceUrl += "," + server;
+            }
+        }
+
+        return serviceUrl;
     }
 
     private List<String> getServers(String serviceName, String rolesType, String portConfigAttr, String portConfigDefaultValue) {
