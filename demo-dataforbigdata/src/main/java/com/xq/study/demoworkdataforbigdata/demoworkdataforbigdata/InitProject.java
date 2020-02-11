@@ -65,17 +65,25 @@ public class InitProject implements ApplicationRunner {
             //WPS  水压传感器
             case "3003":
                 if (isNormal) {
-                    unwindDataList.add(UnwindData.builder().key("hydraulic").value(0.40 + random.nextInt(40)/100d).build());
+                    double value = 0.40 + random.nextInt(40) / 100d;
+                    logger.info("3003 noarmal== {}", value);
+                    unwindDataList.add(UnwindData.builder().key("hydraulic").value(value).build());
                 } else {
-                    unwindDataList.add(UnwindData.builder().key("hydraulic").value(0.60 + random.nextInt(60)/100d).build());
+                    double value = 0.60 + random.nextInt(60) / 100d;
+                    logger.info("3003 abnoarmal== {}", value);
+                    unwindDataList.add(UnwindData.builder().key("hydraulic").value(value).build());
                 }
                 break;
             //WDS 水位传感器
             case "3004":
                 if (isNormal) {
-                    unwindDataList.add(UnwindData.builder().key("stage").value(1d + random.nextInt(100)/100d).build());
+                    double value = 1d + random.nextInt(100) / 100d;
+                    logger.info("3004 noarmal== {}", value);
+                    unwindDataList.add(UnwindData.builder().key("stage").value(value).build());
                 } else {
-                    unwindDataList.add(UnwindData.builder().key("stage").value(2d + random.nextInt(200)/100d).build());
+                    double value = 2d + random.nextInt(200) / 100d;
+                    logger.info("3004 abnoarmal== {}", value);
+                    unwindDataList.add(UnwindData.builder().key("stage").value(value).build());
                 }
                 break;
             default:
@@ -101,10 +109,10 @@ public class InitProject implements ApplicationRunner {
             String formatDate = TimeUtilForJavaEight.getFormatDate(System.currentTimeMillis(), TimeUnit.MILLISECONDS, TimeUtilForJavaEight.PATTERN_YYYY_MM_DDTHH_MM_SS_XXX);
             String sysTime = TimeUtilForJavaEight.getFormatDate(System.currentTimeMillis(), TimeUnit.MILLISECONDS, TimeUtilForJavaEight.PATTERN_YYYY_MM_DDTHH_MM_SS_SSSXXX);
 
-            DeviceInfo deviceInfo=DeviceInfo.builder().firstAreaId(1737L).secondAreaId(1738L).thirdAreaId(1739L).build();
+            DeviceInfo deviceInfo = DeviceInfo.builder().firstAreaId(1737L).secondAreaId(1738L).thirdAreaId(1739L).build();
             List<Long> fList = new ArrayList<>();
             fList.add(1737L);
-            GatewayInfo gwInfo=GatewayInfo.builder().firstAreaId(fList).build();
+            GatewayInfo gwInfo = GatewayInfo.builder().firstAreaId(fList).build();
             AdditionalInfo additionalInfo = AdditionalInfo.builder().deviceInfo(deviceInfo).gwInfo(gwInfo).build();
             GWSensorDataDTO gwSensorDataDTO = GWSensorDataDTO.builder()
                     .rssi(-27.0f).gwip("10.10.21.84").data("a037011464").channel(488500000).snr_max(37.0f)
