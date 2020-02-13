@@ -12,6 +12,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -28,15 +29,38 @@ public class InitProject implements ApplicationRunner {
     @Value("${iot.kafka.producer.topic.origin.data}")
     private String originData;
 
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String kip;
+
+
+    @Resource
+    private ApplicationArguments arguments;
+
     @Autowired
     private KafkaOperations kafkaOperations;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        sendFireSaferData("3001", 0x11760, 105);
-        sendFireSaferData("3002", 0x21780, 105);
-        sendFireSaferData("3003", 0x31800, 105);
-        sendFireSaferData("3004", 0x41800, 105);
+        int snum = 105;
+        int i = 1;
+        if (null != arguments.getOptionValues("snum")) {
+            snum = Integer.valueOf(arguments.getOptionValues("snum").get(0));
+        }
+        if (null != arguments.getOptionValues("lnum")) {
+            i = Integer.valueOf(arguments.getOptionValues("lnum").get(0));
+        }
+
+        logger.info("sensor number=={}", snum);
+        logger.info("send {} times", i);
+        logger.info("kafka ip  {}", kip);
+
+        while (i-- > 0) {
+            sendFireSaferData("3001", 0x11760, snum);
+            sendFireSaferData("3002", 0x21780, snum);
+            sendFireSaferData("3003", 0x31800, snum);
+            sendFireSaferData("3004", 0x41800, snum);
+            Thread.sleep(5000);
+        }
     }
 
     private List<UnwindData> creatUnWindData(String devType, boolean isNormal) {
@@ -66,11 +90,11 @@ public class InitProject implements ApplicationRunner {
             case "3003":
                 if (isNormal) {
                     double value = 0.40 + random.nextInt(40) / 100d;
-                    logger.info("3003 noarmal== {}", value);
+//                    logger.info("3003 noarmal== {}", value);
                     unwindDataList.add(UnwindData.builder().key("hydraulic").value(value).build());
                 } else {
                     double value = 0.60 + random.nextInt(60) / 100d;
-                    logger.info("3003 abnoarmal== {}", value);
+//                    logger.info("3003 abnoarmal== {}", value);
                     unwindDataList.add(UnwindData.builder().key("hydraulic").value(value).build());
                 }
                 break;
@@ -78,11 +102,11 @@ public class InitProject implements ApplicationRunner {
             case "3004":
                 if (isNormal) {
                     double value = 1d + random.nextInt(100) / 100d;
-                    logger.info("3004 noarmal== {}", value);
+//                    logger.info("3004 noarmal== {}", value);
                     unwindDataList.add(UnwindData.builder().key("stage").value(value).build());
                 } else {
                     double value = 2d + random.nextInt(200) / 100d;
-                    logger.info("3004 abnoarmal== {}", value);
+//                    logger.info("3004 abnoarmal== {}", value);
                     unwindDataList.add(UnwindData.builder().key("stage").value(value).build());
                 }
                 break;
@@ -100,8 +124,8 @@ public class InitProject implements ApplicationRunner {
             String devMacAddr = "90100005000" + Integer.toHexString(macBegin + i).toUpperCase();
             String gwid = "000080029c09e987";
             boolean isNormal = true;
-            int step = (devCount - 3) / 5;
-            if (i > step * 5) {
+            int step = (devCount - 3) / 10;
+            if (i > step * 10) {
                 isNormal = false;
             }
             List<UnwindData> unwindDataList = creatUnWindData(deviceTypeCode, isNormal);
