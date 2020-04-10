@@ -41,7 +41,7 @@ public class InitProject implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        int snum = 105;
+        int snum = 405;
         int i = 1;
         if (null != arguments.getOptionValues("snum")) {
             snum = Integer.valueOf(arguments.getOptionValues("snum").get(0));

@@ -8,10 +8,10 @@
         <version>2.2.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.xq.study.demo</groupId>
-    <artifactId>demo</artifactId>
+    <groupId>com.xq.study.ovsdb</groupId>
+    <artifactId>demo-ovsdb-controller</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo</name>
+    <name>demo-ovsdb-controller</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -26,11 +26,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-<!--          <dependency>-->
-<!--            <groupId>javax.servlet</groupId>-->
-<!--            <artifactId>javax.servlet-api</artifactId>-->
-<!--            <version>4.0.1</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>com.vmware.ovsdb</groupId>
             <artifactId>ovsdb-client</artifactId>
@@ -40,7 +35,7 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
-         </dependency>
+        </dependency>
     </dependencies>
 
     <build>
