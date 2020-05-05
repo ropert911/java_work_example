@@ -8,9 +8,9 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
          <module>demo-dataforbigdata</module>
+        <module>demo-ovsdb-controller</module>
         <module>demo-readcdh</module>
         <module>demo-readcdh-nonspring</module>
-        <module>demo-sendEvent</module>
     </modules>
     <packaging>pom</packaging>
 
